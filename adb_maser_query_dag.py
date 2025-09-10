@@ -50,7 +50,7 @@ with DAG(
     execute_incert_to_table_trino_query = SQLExecuteQueryOperator(
         task_id='incert_to_table_adb_master',
         sql="""
-        INSERT INTO iceberg.example.names VALUES
+        INSERT INTO example.names VALUES
         (1, 'Alice', '2025-01-01 10:00:00'),
         (2, 'Bob', '2025-01-02 11:30:00');
         """,
