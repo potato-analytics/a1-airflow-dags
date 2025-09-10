@@ -18,7 +18,7 @@ with DAG(
     )
 
     execute_create_trino_query = SQLExecuteQueryOperator(
-        task_id='drop_shcema_iceberg',
+        task_id='create_shcema_iceberg',
         sql="CREATE SCHEMA IF NOT EXISTS iceberg.example;",
         conn_id='sel-dev-trino-iceberg',
         autocommit=True,
