@@ -25,13 +25,13 @@ with DAG(
         split_statements=True,
     )
 
-    execute_drop_table_trino_query = SQLExecuteQueryOperator(
-        task_id='drop_table_iceberg',
-        sql="DROP TABLE IF EXISTS iceberg.example.names;",
-        conn_id='sel-dev-trino-iceberg',
-        autocommit=True,
-        split_statements=True,
-    )
+    # execute_drop_table_trino_query = SQLExecuteQueryOperator(
+    #     task_id='drop_table_iceberg',
+    #     sql="DROP TABLE IF EXISTS iceberg.example.names;",
+    #     conn_id='sel-dev-trino-iceberg',
+    #     autocommit=True,
+    #     split_statements=True,
+    # )
 
     # execute_create_table_trino_query = SQLExecuteQueryOperator(
     #     task_id='create_table_iceberg',
@@ -61,8 +61,8 @@ with DAG(
 
     # Define task dependencies
     execute_drop_shema_trino_query >> \
-    execute_create_shema_trino_query >> \
-    execute_drop_table_trino_query
+    execute_create_shema_trino_query
 
+    #execute_drop_table_trino_query >> \
     # execute_create_table_trino_query >> \
     # execute_incert_to_table_trino_query
