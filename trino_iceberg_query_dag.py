@@ -4,8 +4,8 @@ from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 
 with DAG(
     dag_id='trino_iceberg_query_example',
-    start_date=datetime(2025, 9, 10),
-    schedule_interval=None,
+    start_date=datetime(2025, 9, 9),
+    schedule_interval='@once',
     catchup=False,
     tags=['trino', 'example'],
 ) as dag:
