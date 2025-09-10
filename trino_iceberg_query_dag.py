@@ -9,16 +9,22 @@ with DAG(
     catchup=False,
     tags=['trino', 'example'],
 ) as dag:
-    # Define a TrinoOperator task to execute a simple SELECT query
-    execute_trino_query = SQLExecuteQueryOperator(
-        task_id='execute_trino_iceberg_query',
-        sql="SELECT 1;",
-        conn_id='sel-dev-trino-iceberg',  # Replace with your Trino connection ID
+    execute_drop_trino_query = SQLExecuteQueryOperator(
+        task_id='drop_shcema_iceberg',
+        sql="DROP SCHEMA IF EXISTS iceberg.example;",
+        conn_id='sel-dev-trino-iceberg',
         autocommit=True,
-        split_statements=True,  # Important for multiple statements
+        split_statements=True,
+    )
+
+    execute_create_trino_query = SQLExecuteQueryOperator(
+        task_id='drop_shcema_iceberg',
+        sql="CREATE SCHEMA IF NOT EXISTS iceberg.example;",
+        conn_id='sel-dev-trino-iceberg',
+        autocommit=True,
+        split_statements=True,
     )
 
 
     # Define task dependencies
-    execute_trino_query
-    #>> trino_insert_task >> trino_from_file_task
+    execute_drop_trino_query >> execute_create_trino_query
