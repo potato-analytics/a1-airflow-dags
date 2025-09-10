@@ -33,34 +33,36 @@ with DAG(
         split_statements=True,
     )
 
-    execute_create_table_trino_query = SQLExecuteQueryOperator(
-        task_id='create_table_iceberg',
-        sql="""
-        CREATE TABLE iceberg.example.names (
-        id INT,
-        name VARCHAR,
-        timestamp TIMESTAMP
-        );
-        """,
-        conn_id='sel-dev-trino-iceberg',
-        autocommit=True,
-        split_statements=True,
-    )
-
-    execute_incert_to_table_trino_query = SQLExecuteQueryOperator(
-        task_id='incert_to_table_iceberg',
-        sql="""
-        INSERT INTO iceberg.example.names VALUES
-        (1, 'Alice', '2025-01-01 10:00:00'),
-        (2, 'Bob', '2025-01-02 11:30:00');""",
-        conn_id='sel-dev-trino-iceberg',
-        autocommit=True,
-        split_statements=True,
-    )
+    # execute_create_table_trino_query = SQLExecuteQueryOperator(
+    #     task_id='create_table_iceberg',
+    #     sql="""
+    #     CREATE TABLE iceberg.example.names (
+    #     id INT,
+    #     name VARCHAR,
+    #     timestamp TIMESTAMP
+    #     );
+    #     """,
+    #     conn_id='sel-dev-trino-iceberg',
+    #     autocommit=True,
+    #     split_statements=True,
+    # )
+    #
+    # execute_incert_to_table_trino_query = SQLExecuteQueryOperator(
+    #     task_id='incert_to_table_iceberg',
+    #     sql="""
+    #     INSERT INTO iceberg.example.names VALUES
+    #     (1, 'Alice', '2025-01-01 10:00:00'),
+    #     (2, 'Bob', '2025-01-02 11:30:00');
+    #     """,
+    #     conn_id='sel-dev-trino-iceberg',
+    #     autocommit=True,
+    #     split_statements=True,
+    # )
 
     # Define task dependencies
     execute_drop_shema_trino_query >> \
     execute_create_shema_trino_query >> \
-    execute_drop_table_trino_query >> \
-    execute_create_table_trino_query >> \
-    execute_incert_to_table_trino_query
+    execute_drop_table_trino_query
+
+    # execute_create_table_trino_query >> \
+    # execute_incert_to_table_trino_query
