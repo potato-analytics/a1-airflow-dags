@@ -39,7 +39,7 @@ with DAG(
         CREATE TABLE iceberg.example.names (
         id INT,
         name VARCHAR,
-        timestamp TIMESTAMP
+        timestamp VARCHAR
         );
         """,
         conn_id='sel-dev-trino-iceberg',
