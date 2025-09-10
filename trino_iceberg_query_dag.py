@@ -11,7 +11,7 @@ with DAG(
 ) as dag:
     execute_drop_shema_trino_query = SQLExecuteQueryOperator(
         task_id='drop_schema_iceberg',
-        sql="DROP SCHEMA IF EXISTS iceberg.example;",
+        sql="DROP SCHEMA IF EXISTS iceberg.example CASCADE;",
         conn_id='sel-dev-trino-iceberg',
         autocommit=True,
         split_statements=True,
