@@ -1,19 +1,21 @@
 from airflow import DAG
-from airflow.providers.trino.operators.trino import TrinoOperator
-from datetime import datetime
+from datetime import datetime, timedelta
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 
 with DAG(
-    dag_id='airflow_to_trino_query',
-    start_date=datetime(2023, 1, 1),
+    dag_id='trino_iceberg_query_example',
+    start_date=datetime(2025, 9, 10),
     schedule_interval=None,
     catchup=False,
     tags=['trino', 'example'],
 ) as dag:
     # Define a TrinoOperator task to execute a simple SELECT query
-    trino_select_task = TrinoOperator(
-        task_id='execute_trino_select',
+    execute_trino_query = SQLExecuteQueryOperator(
+        task_id='execute_trino_iceberg_query',
         sql="SELECT 1;",
-        trino_conn_id='sel-dev-trino',  # This refers to an Airflow connection named 'trino_default'
+        conn_id='sel-dev-trino-iceberg',  # Replace with your Trino connection ID
+        autocommit=True,
+        split_statements=True,  # Important for multiple statements
     )
 
     # # Define another TrinoOperator task to execute an INSERT statement
