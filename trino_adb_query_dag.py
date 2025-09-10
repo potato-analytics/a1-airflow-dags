@@ -51,7 +51,7 @@ with DAG(
     # execute_incert_to_table_trino_query = SQLExecuteQueryOperator(
     #     task_id='incert_to_table_adb',
     #     sql="""
-    #     INSERT INTO iceberg.example.names VALUES
+    #     INSERT INTO adb.example.names VALUES
     #     (1, 'Alice', '2025-01-01 10:00:00'),
     #     (2, 'Bob', '2025-01-02 11:30:00');
     #     """,
@@ -62,7 +62,7 @@ with DAG(
 
     # execute_select_table_trino_query = SQLExecuteQueryOperator(
     #     task_id='select_from_table_adb',
-    #     sql="SELECT * FROM iceberg.example.names;",
+    #     sql="SELECT * FROM adb.example.names;",
     #     conn_id='sel-dev-trino-adb',
     #     autocommit=True,
     #     split_statements=True,
@@ -70,7 +70,7 @@ with DAG(
 
     # execute_create_as_select_table_trino_query = SQLExecuteQueryOperator(
     #     task_id='create_as_select_from_table_adb',
-    #     sql="CREATE TABLE iceberg.example.names_from AS SELECT * FROM iceberg.example.names;",
+    #     sql="CREATE TABLE adb.example.names_from AS SELECT * FROM iceberg.example.names;",
     #     conn_id='sel-dev-trino-adb',
     #     autocommit=True,
     #     split_statements=True,
