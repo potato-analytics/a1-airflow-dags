@@ -1,13 +1,14 @@
 from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from datetime import datetime
+import json
 
 from airflow.hooks.base import BaseHook
 s3_connection = BaseHook.get_connection('sel-dev-s3-logs')
 print("==============")
 access_key = s3_connection.login
 secret_key = s3_connection.password
-print(s3_connection.extra)
+extra_data = json.loads(s3_connection.extra)
 
 print("==============")
 
