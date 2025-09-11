@@ -2,8 +2,8 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf
 
 endpoint_url_src = 'https://hb.ru-msk.vkcs.cloud'
-access_key_src = 'fcztu19kAqsh5zA9z3gvcg'
-secret_key_src = 'gbEYnvDsuDDeKZynNnNfuk4KEMnBaBb9VXf12smtBswD'
+access_key_src = ''
+secret_key_src = ''
 
 spark = SparkSession.builder \
     .appName("JupyterHub_Spark_Read_From_other_S3_bucket") \
