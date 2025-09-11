@@ -5,8 +5,10 @@ from datetime import datetime
 from airflow.hooks.base import BaseHook
 s3_connection = BaseHook.get_connection('sel-dev-s3-logs')
 print("==============")
-print(s3_connection.login)
-print(s3_connection.password)
+access_key = s3_connection.login
+secret_key = s3_connection.password
+print(s3_connection.extra)
+
 print("==============")
 
 with DAG(
