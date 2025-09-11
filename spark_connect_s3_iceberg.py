@@ -3,10 +3,10 @@ from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOpe
 from datetime import datetime
 
 from airflow.hooks.base import BaseHook
-conn = BaseHook.get_connection('sel-dev-s3-logs')
-print(conn.get_extra())
+s3_connection = BaseHook.get_connection('sel-dev-s3-logs')
 print("==============")
-print(conn.get_data())
+print(s3_connection)
+print("==============")
 
 with DAG(
     dag_id='spark_connect_s3_iceberg',
