@@ -9,7 +9,7 @@ print("==============")
 access_key = s3_connection.login
 secret_key = s3_connection.password
 extra_data = json.loads(s3_connection.extra)
-print(extra_data)
+print(extra_data.get("endpoint"))
 print("==============")
 
 with DAG(
