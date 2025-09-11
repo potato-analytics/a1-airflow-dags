@@ -1,16 +1,15 @@
 from airflow import DAG
+from airflow.hooks.base import BaseHook
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from datetime import datetime
 import json
 
-from airflow.hooks.base import BaseHook
 s3_connection = BaseHook.get_connection('sel-dev-s3-logs')
-print("==============")
+
 access_key = s3_connection.login
 secret_key = s3_connection.password
 extra_data = json.loads(s3_connection.extra)
-print(extra_data.get("endpoint"))
-print("==============")
+endpoint = extra_data.get("endpoint")
 
 with DAG(
     dag_id='spark_connect_s3_iceberg',
@@ -22,6 +21,8 @@ with DAG(
         task_id='spark_connect_s3_iceberg_read',
         application='s3a://demo-bucket/pyspark/01_spark_read_iceberg.py',  # Or .jar file
         conn_id='sel-dev-spark-connect',  # The Connection Id you defined
-        #conf={'spark.executor.memory': '4g'},  # Optional Spark configurations
+        conf={'spark.hadoop.fs.s3a.access.key': access_key,
+              "spark.hadoop.fs.s3a.secret.key": secret_key,
+              "spark.hadoop.fs.s3a.endpoint": endpoint},  # Optional Spark configurations
         #application_args=['arg1', 'arg2'],  # Arguments for your Spark application
     )
