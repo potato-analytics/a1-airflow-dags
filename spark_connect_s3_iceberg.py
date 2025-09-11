@@ -31,8 +31,8 @@ with DAG(
         conf={'spark.hadoop.fs.s3a.access.key': access_key,
               "spark.hadoop.fs.s3a.secret.key": secret_key,
               "spark.hadoop.fs.s3a.endpoint": endpoint},
-        application_args=['--input_access_key ' + external_access_key,
-                          '--input_secret_key ' + external_secret_key,
-                          '--input_endpoint ' + external_endpoint,
-                          '--input_bucket ' + external_bucket],
+        application_args=[external_access_key,
+                          external_secret_key,
+                          external_endpoint,
+                          external_bucket],
     )
