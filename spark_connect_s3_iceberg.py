@@ -11,6 +11,13 @@ secret_key = s3_connection.password
 extra_data = json.loads(s3_connection.extra)
 endpoint = extra_data.get("endpoint")
 
+s3_external_connection = BaseHook.get_connection('vk-external-s3')
+external_access_key = s3_external_connection.login
+external_secret_key = s3_external_connection.password
+external_extra_data = json.loads(s3_external_connection.extra)
+external_endpoint = external_extra_data.get("endpoint")
+external_bucket = external_extra_data.get("bucket")
+
 with DAG(
     dag_id='spark_connect_s3_iceberg',
     start_date=datetime(2023, 1, 1),
@@ -24,5 +31,8 @@ with DAG(
         conf={'spark.hadoop.fs.s3a.access.key': access_key,
               "spark.hadoop.fs.s3a.secret.key": secret_key,
               "spark.hadoop.fs.s3a.endpoint": endpoint},  # Optional Spark configurations
-        #application_args=['arg1', 'arg2'],  # Arguments for your Spark application
+        application_args=['--input_access_key ' + external_access_key,
+                          '--input_secret_key ' + external_secret_key,
+                          '--input_endpoint ' + external_endpoint,
+                          '--input_bucket ' + external_bucket],  # Arguments for your Spark application
     )
