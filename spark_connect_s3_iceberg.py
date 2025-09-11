@@ -2,6 +2,10 @@ from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from datetime import datetime
 
+# from airflow.hooks.base_hook import BaseHook
+# conn = BaseHook.get_connection('sel-dev-s3-logs')
+# print(conn.get_extra())
+
 with DAG(
     dag_id='spark_connect_s3_iceberg',
     start_date=datetime(2023, 1, 1),
@@ -12,7 +16,7 @@ with DAG(
         task_id='spark_connect_s3_iceberg_read',
         application='s3a://demo-bucket/pyspark/01_spark_read_iceberg.py',  # Or .jar file
         conn_id='sel-dev-spark-connect',  # The Connection Id you defined
+        packages='org.apache.hadoop:hadoop-aws:3.3.1,com.amazonaws:aws-java-sdk-bundle:1.11.901', # Example for additional packages
         #conf={'spark.executor.memory': '4g'},  # Optional Spark configurations
         #application_args=['arg1', 'arg2'],  # Arguments for your Spark application
-        #packages='org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0', # Example for additional packages
     )
