@@ -18,6 +18,10 @@ external_extra_data = json.loads(s3_external_connection.extra)
 external_endpoint = external_extra_data.get("endpoint")
 external_bucket = external_extra_data.get("bucket")
 
+sc_spark_connection = BaseHook.get_connection('sel-dev-spark-connect')
+sc_spark_connection_extra_data = json.loads(sc_spark_connection.extra)
+sc_url = external_extra_data.get("sc_url")
+
 with DAG(
     dag_id='spark_connect_s3_iceberg',
     start_date=datetime(2023, 1, 1),
@@ -34,5 +38,6 @@ with DAG(
         application_args=[external_access_key,
                           external_secret_key,
                           external_endpoint,
-                          external_bucket],
+                          external_bucket,
+                          sc_url],
     )
