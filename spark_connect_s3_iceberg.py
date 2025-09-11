@@ -6,7 +6,7 @@ from airflow.hooks.base import BaseHook
 s3_connection = BaseHook.get_connection('sel-dev-airflow-scripts')
 print("==============")
 print(s3_connection)
-print(s3_connection.extra.fs_s3a_access_key)
+print(s3_connection.extra)
 print("==============")
 
 with DAG(
