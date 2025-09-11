@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from datetime import datetime
 
-from airflow.hooks.base_hook import BaseHook
+from airflow.hooks.base import BaseHook
 conn = BaseHook.get_connection('sel-dev-s3-logs')
 print(conn.get_extra())
 print("==============")
