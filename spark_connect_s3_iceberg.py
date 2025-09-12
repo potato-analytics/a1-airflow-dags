@@ -29,7 +29,7 @@ print(sc_url)
 print("=====================")
 print(sc_spark_connection.conn_type)
 print(SparkConnectHook.conn_type)
-print(SparkConnectHook("sel-dev-spark-connect").get_connection_url)
+print(SparkConnectHook("sel-dev-spark-connect").get_connection_url())
 print("=====================")
 with DAG(
     dag_id='spark_connect_s3_iceberg',
