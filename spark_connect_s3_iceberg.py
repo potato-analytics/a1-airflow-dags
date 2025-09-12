@@ -44,10 +44,10 @@ with DAG(
         conn_id='sel-dev-spark-connect',
         conf={'spark.hadoop.fs.s3a.access.key': "1703b531c6154229b2ce27848703b84d",
               "spark.hadoop.fs.s3a.secret.key": "af7afab662d14b2890402caf3a76153d",
-              "spark.hadoop.fs.s3a.endpoint": "s3.ru-7.storage.selcloud.ru"}
+              "spark.hadoop.fs.s3a.endpoint": "s3.ru-7.storage.selcloud.ru"},
     #     application_args=[external_access_key,
     #                       external_secret_key,
     #                       external_endpoint,
     #                       external_bucket,
     #                       sc_url],
-    # )
+    )
