@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.hooks.base import BaseHook
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from datetime import datetime
+from airflow.providers.apache.spark.hooks.spark_connect import SparkConnectHook
 import json
 
 s3_connection = BaseHook.get_connection('sel-dev-s3-logs')
@@ -26,7 +27,9 @@ sc_spark_connection_extra_data = json.loads(sc_spark_connection.extra)
 sc_url = sc_spark_connection_extra_data.get("sc_url")
 print(sc_url)
 print("=====================")
-
+print(sc_spark_connection.conn_type)
+print(SparkConnectHook.conn_type)
+print("=====================")
 with DAG(
     dag_id='spark_connect_s3_iceberg',
     start_date=datetime(2023, 1, 1),
