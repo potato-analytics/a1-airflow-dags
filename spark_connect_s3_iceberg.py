@@ -37,6 +37,11 @@ with DAG(
     schedule='@once',
     catchup=False,
 ) as dag:
+    print("=====================")
+    print(sc_spark_connection.conn_type)
+    print(SparkConnectHook.conn_type)
+    print(SparkConnectHook("sel-dev-spark-connect").get_connection_url())
+    print("=====================")
     submit_spark_job = SparkSubmitOperator(
         task_id='spark_connect_s3_iceberg_read',
         application='s3a://demo-bucket/pyspark/01_spark_read_iceberg.py',
