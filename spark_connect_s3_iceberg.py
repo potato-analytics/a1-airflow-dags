@@ -19,6 +19,9 @@ external_endpoint = external_extra_data.get("endpoint")
 external_bucket = external_extra_data.get("bucket")
 
 sc_spark_connection = BaseHook.get_connection('sel-dev-spark-connect')
+print("=====================")
+print(BaseHook.get_connection('sel-dev-spark-connect'))
+print("=====================")
 sc_spark_connection_extra_data = json.loads(sc_spark_connection.extra)
 sc_url = external_extra_data.get("sc_url")
 
