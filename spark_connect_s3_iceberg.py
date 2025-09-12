@@ -24,6 +24,8 @@ print(BaseHook.get_connection('sel-dev-spark-connect'))
 print("=====================")
 sc_spark_connection_extra_data = json.loads(sc_spark_connection.extra)
 sc_url = external_extra_data.get("sc_url")
+print(sc_url)
+print("=====================")
 
 with DAG(
     dag_id='spark_connect_s3_iceberg',
