@@ -1,6 +1,5 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.utils.dates import days_ago
 from datetime import datetime, timedelta
 from airflow.hooks.base import BaseHook
 import json
@@ -24,7 +23,6 @@ with DAG(
     catchup=False,
     tags=['spark_connect', 'example'],
 ) as dag:
-    # Task 1: Execute a simple echo command
     run_spark_connect = BashOperator(
         task_id='bash_spark_connect_run',
         bash_command='spark-submit --conf spark.hadoop.fs.s3a.access.key=' + access_key +
