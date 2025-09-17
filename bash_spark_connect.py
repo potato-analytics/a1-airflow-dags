@@ -25,7 +25,8 @@ with DAG(
 ) as dag:
     run_spark_connect = BashOperator(
         task_id='bash_spark_connect_run',
-        bash_command='spark-submit --conf spark.hadoop.fs.s3a.access.key=' + access_key +
+        bash_command='spark-submit remote sc://10.200.0.240:15002'
+                     ' --conf spark.hadoop.fs.s3a.access.key=' + access_key +
                      ' --conf spark.hadoop.fs.s3a.secret.key=' + secret_key +
                      ' --conf spark.hadoop.fs.s3a.endpoint=' + endpoint +
                      ' --name arrow-spark'
